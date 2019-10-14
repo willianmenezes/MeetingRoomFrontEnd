@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 const KEY = 'authToken';
 const refreshToken = 'refreshToken';
+const expiration = 'expiration';
 
 @Injectable({
     providedIn: 'root'
@@ -33,6 +34,14 @@ export class TokenService {
 
     hasToken() {
         return !!this.getToken();
+    }
+
+    setExpiration(exp: string) {
+        window.localStorage.setItem(expiration, exp);
+    }
+
+    getExpiration() {
+        return window.localStorage.getItem(expiration);
     }
 
 }

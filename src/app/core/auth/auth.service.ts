@@ -35,9 +35,9 @@ export class AuthService {
                     //salvando o token e o refresh token no navegador
                     this.userService.setRefreshToken(token.refreshToken);
                     this.userService.setToken(token.accessToken);
+                    this.userService.setExpiration(token.expiration.toString());
                 }
-               
-            }))
+            }));
     }
 
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TokenService } from '../token/token.service';
-import * as jwt_decode  from 'jwt-decode';
+import * as jwt_decode from 'jwt-decode';
 
 import { DataUserToken } from 'src/app/Models/DataUserToken';
 
@@ -45,4 +45,11 @@ export class UserService {
         return this.user;
     }
 
+    setExpiration(exp: string) {
+        this.tokenService.setExpiration(exp);
+    }
+
+    getExpiration() {
+        return this.tokenService.getExpiration();
+    }
 }

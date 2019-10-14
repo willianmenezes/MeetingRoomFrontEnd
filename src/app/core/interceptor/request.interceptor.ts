@@ -29,7 +29,7 @@ export class RequestInterceptor implements HttpInterceptor {
 
             //clonando a requisição e setando o header com o token
             if (token) {
-                req = req.clone({ headers: req.headers.set('Authorization', 'Bearer' + token) });
+                req = req.clone({ headers: req.headers.set('Authorization', 'Bearer ' + token) });
             }
 
             if (!req.headers.has('Content-Type')) {
@@ -37,22 +37,25 @@ export class RequestInterceptor implements HttpInterceptor {
             }
 
             req = req.clone({ headers: req.headers.set('Accept', 'application/json') });
-
         }
 
         //verificando erros do retorno para fazer ou não uma nova requisição
         return next.handle(req).pipe(catchError((error) => {
 
-            if (error.status == 401 && error.statusText == "Unauthorized") {
+            console.log(error);
+
+            if (error.status == 401 && error.statusText == "OK") {
 
                 //buscando o email do usuário no token armazenado
                 let usuario = this.userService.getUser().unique_name[0];
+                let expiration = this.tokenService.getExpiration();
+
                 let refreshToken = this.tokenService.getRefreshToken();
 
                 //refazendo a requisição para o refresh token
                 return this.http
                     .post(URL_API + 'Login',
-                        { usuario, refreshToken, tipoConcessao: 'refresh_token' },
+                        { usuario, refreshToken, tipoConcessao: 'refresh_token', expiration },
                         { observe: 'response' })
 
                     //mescando as requisições e emitindo apenas uma no final
@@ -70,14 +73,12 @@ export class RequestInterceptor implements HttpInterceptor {
 
                             return next.handle(req);
                         } else {
-                            //aqui manda para o not authorized
+                            this.router.navigate(['/not-authorized']);
                         }
-                    }))
-
+                    }));
+            } else {
+                throw error;
             }
-
-        }))
-
+        }));
     }
-
 }
