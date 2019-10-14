@@ -3,6 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { LoginComponent } from './home/login/login.component';
 import { SalasComponent } from './core/salas/salas.component';
+import { NotFoundComponent } from './errors/not-found/not-found.component';
+import { NotAuthorizedComponent } from './errors/not-authorized/not-authorized.component';
 
 export const routes: Routes = [
     {
@@ -17,6 +19,18 @@ export const routes: Routes = [
     {
         path: 'sala',
         component: SalasComponent
+    },
+    {
+        path: 'not-found',
+        component: NotFoundComponent
+    },
+    {
+        path: 'not-authorized',
+        component: NotAuthorizedComponent
+    },
+    {
+        path:'**',
+        redirectTo: 'not-found'
     }
 ];
 

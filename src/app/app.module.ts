@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { HomeModule } from './home/home.module';
 import { CoreModule } from './core/core.module';
 import { AppRoutingModule } from './app.routing.module';
+import { ErrorsModule } from './errors/errors.module';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { AppRoutingModule } from './app.routing.module';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
+    ErrorsModule,
     HomeModule,
     CoreModule
   ],
