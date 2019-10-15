@@ -1,9 +1,17 @@
-<div class="card border-primary  mt-3 ml-3 mb-3 mr-0">
-    <div class="card-header bg-primary text-light">{{sala.snome}}</div>
+<div class="card  mt-3 ml-3 mb-3 mr-0" [ngClass]="{
+                'border-success':sala.reserva.length === 0 || sala.reserva[0]?.nstatus === 0, 
+                'border-danger':sala.reserva[0]?.nstatus === 1}">
+    <div class="card-header text-light" [ngClass]="{
+                                                    'bg-success':sala.reserva.length === 0 || sala.reserva[0]?.nstatus === 0, 
+                                                    'bg-danger':sala.reserva[0]?.nstatus === 1
+                                                    }">{{sala.snome}} -
+        <span *ngIf="sala.reserva[0]?.nstatus === 0 || sala.reserva.length === 0">Livre</span>
+        <span *ngIf="sala.reserva[0]?.nstatus === 1">Reservada</span>
+    </div>
     <div class="card-body text-dark">
         <h5 class="card-title">Primary card title</h5>
         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
             card's content.</p>
     </div>
-    <button class="btn btn-dark m-2">Agendar</button>
+    <button class="btn btn-dark m-2" [disabled]="sala.reserva[0]?.nstatus === 1">Agendar</button>
 </div>

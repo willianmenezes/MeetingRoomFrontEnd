@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 import { SalasComponent } from './salas/salas.component';
 import { SalaComponent } from './salas/sala/sala.component';
@@ -10,7 +11,8 @@ import { SalaComponent } from './salas/sala/sala.component';
         SalaComponent
     ],
     imports: [
-        CommonModule
+        CommonModule,
+        RouterModule
     ],
     exports: []
 })

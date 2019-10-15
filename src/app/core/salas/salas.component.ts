@@ -21,6 +21,7 @@ export class SalasComponent implements OnInit {
             .getSalas()
             .subscribe((salas: Sala[]) => {
                 this.salas = salas;
+                console.log(salas);
             })
     }
 }
