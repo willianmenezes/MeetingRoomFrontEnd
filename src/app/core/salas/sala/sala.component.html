@@ -1,7 +1,7 @@
 <div class="card  mt-3 ml-3 mb-3 mr-0" [ngClass]="{
                 'border-success':sala.reserva.length === 0 || sala.reserva[0]?.nstatus === 0, 
                 'border-danger':sala.reserva[0]?.nstatus === 1}">
-    <div class="card-header text-light" [ngClass]="{
+    <div class="card-header text-light h6" [ngClass]="{
                                                     'bg-success':sala.reserva.length === 0 || sala.reserva[0]?.nstatus === 0, 
                                                     'bg-danger':sala.reserva[0]?.nstatus === 1
                                                     }">{{sala.snome}} -
@@ -13,5 +13,8 @@
         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
             card's content.</p>
     </div>
-    <button class="btn btn-dark m-2" [disabled]="sala.reserva[0]?.nstatus === 1">Agendar</button>
+    <button class="btn btn-dark m-2" [disabled]="sala.reserva[0]?.nstatus === 1" data-toggle="modal"
+        data-target="#modalReserva">Agendar</button>
 </div>
+
+<app-reserva></app-reserva>

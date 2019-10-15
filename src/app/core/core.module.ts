@@ -4,14 +4,18 @@ import { RouterModule } from '@angular/router';
 
 import { SalasComponent } from './salas/salas.component';
 import { SalaComponent } from './salas/sala/sala.component';
+import { ReservaComponent } from './reserva/reserva.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [
         SalasComponent,
-        SalaComponent
+        SalaComponent,
+        ReservaComponent
     ],
     imports: [
         CommonModule,
+        ReactiveFormsModule,
         RouterModule
     ],
     exports: []
