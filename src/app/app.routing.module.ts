@@ -5,6 +5,10 @@ import { LoginComponent } from './home/login/login.component';
 import { SalasComponent } from './core/salas/salas.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { NotAuthorizedComponent } from './errors/not-authorized/not-authorized.component';
+import { HorarioSalaComponent } from './core/salas/horario-sala/horario-sala.component';
+import { MenuAplicacao } from './core/menu-apliccao/menu-aplicacao.component';
+
+// classe responsável por gerenciar as rotas da aplicação
 
 export const routes: Routes = [
     {
@@ -17,8 +21,23 @@ export const routes: Routes = [
         component: LoginComponent
     },
     {
-        path: 'sala',
-        component: SalasComponent
+        path: 'home',
+        component: MenuAplicacao,
+        children: [
+            {
+                path: '',
+                pathMatch: 'full',
+                redirectTo: 'salas'
+            },
+            {
+                path: 'salas',
+                component: SalasComponent
+            },
+            {
+                path: 'horario-sala/:id',
+                component: HorarioSalaComponent
+            }
+        ]
     },
     {
         path: 'not-found',
@@ -29,7 +48,7 @@ export const routes: Routes = [
         component: NotAuthorizedComponent
     },
     {
-        path:'**',
+        path: '**',
         redirectTo: 'not-found'
     }
 ];

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Sala } from 'src/app/Models/Sala';
 
 @Component({
@@ -6,10 +6,13 @@ import { Sala } from 'src/app/Models/Sala';
     templateUrl: './sala.component.html',
     styleUrls: ['./sala.component.css']
 })
-export class SalaComponent {
+export class SalaComponent implements OnInit {
 
-    @Input() sala: Sala;
+    // recebe os dados do pai de uma sala para usar no template
+    @Input() salaInput: Sala;
 
     constructor() { }
 
+    ngOnInit(): void {
+    }
 }

@@ -1,26 +1,5 @@
-<div class="row m-0">
-    <div class="col-12 m-0 p-0">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand h2 pt-0 m-0" href="#">Meeting Room</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse ml-4" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" [routerLink]="['/sala']">Salas</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" [routerLink]="">Meus Agendamentos</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </div>
-</div>
 <div class="row m-0 mr-3">
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3"  *ngFor="let sl of salas">
-        <app-sala [sala]="sl"></app-sala>
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3" *ngFor="let sl of salas">
+        <app-sala [salaInput]="sl"></app-sala>
     </div>
 </div>

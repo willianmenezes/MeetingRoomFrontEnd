@@ -7,8 +7,6 @@ import { Token } from 'src/app/Models/token';
 import * as  alertfy from 'alertifyjs';
 import { Router } from '@angular/router';
 
-// declare const alertfy: any;
-
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
@@ -23,8 +21,6 @@ export class LoginComponent implements OnInit {
         private authService: AuthService,
         private router: Router
     ) { }
-
-
 
     ngOnInit(): void {
         this.formLogin = this.fb.group({
@@ -52,11 +48,14 @@ export class LoginComponent implements OnInit {
 
                 if (token.autenticado === true) {
                     alertfy.success('Login realizado com sucesso.');
-                   this.router.navigate(['sala']);
+                   this.router.navigate(['home']);
                 } else if (token.autenticado === false) {
                     alertfy.error('Usuário ou senha invalildos.');
                 }
 
+            }, (erro) => {
+                alertfy.danger('Erro ao efetuar login.');
+                console.log(erro);
             });
     }
 

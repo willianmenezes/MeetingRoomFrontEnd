@@ -4,44 +4,45 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Reservar sala</h5>
+                <h5 class="modal-title">Reservar sala</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <form [formGroup]="formReserva" (submit)="reservar()">
+            <form [formGroup]="formReserva" (submit)="reservar()">
+                <div class="modal-body">
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="inputEmail" class="small h5">Data/Hora inicial:</label>
-                                <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp"
-                                    formControlName="DdataHoraIni" placeholder="E-mail">
+                                <label for="DdataHoraIni" class="small h5">Data/Hora inicial:</label>
+                                <input type="datetime-local" class="form-control" id="" aria-describedby="emailHelp"
+                                    #inputDtaIni formControlName="DdataHoraIni" placeholder="E-mail">
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="inputEmail" class="small">Data/Hora inicial:</label>
-                                <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp"
-                                    formControlName="DdataHoraIni" placeholder="E-mail">
+                                <label for="DdataHoraFim" class="small">Data/Hora final:</label>
+                                <input type="datetime-local" class="form-control" id="DdataHoraFim"
+                                    aria-describedby="emailHelp" #inputDtaFim formControlName="DdataHoraFim"
+                                    placeholder="E-mail">
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">
-                                <label for="inputEmail" class="small">Sala:</label>
-                                <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp"
-                                    formControlName="DdataHoraIni" placeholder="E-mail">
+                                <label for="inputSala" class="small">Sala:</label>
+                                <input type="text" class="form-control" id="inputSala" aria-describedby="emailHelp"
+                                    formControlName="NidSala" #inputSala>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">
-                                <label for="inputEmail" class="small">Título da reserva:</label>
-                                <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp"
-                                    formControlName="DdataHoraIni" placeholder="E-mail">
+                                <label for="inputTitulo" class="small">Título da reserva:</label>
+                                <textarea type="email" class="form-control" id="inputTitulo"
+                                    aria-describedby="emailHelp" formControlName="Stitulo"></textarea>
                             </div>
                         </div>
                     </div>
@@ -49,17 +50,17 @@
                         <div class="col-12">
                             <div class="form-group">
                                 <label for="inputEmail" class="small">Descrição:</label>
-                                <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp"
-                                    formControlName="DdataHoraIni" placeholder="E-mail">
+                                <textarea type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp"
+                                    formControlName="Sdescricao"></textarea>
                             </div>
                         </div>
                     </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-dark" data-dismiss="modal">Fechar</button>
-                <button type="button" class="btn btn-primary">Salvar</button>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-dark" data-dismiss="modal">Fechar</button>
+                    <button type="submit" class="btn btn-primary" [disabled]="formReserva.invalid">Salvar</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
