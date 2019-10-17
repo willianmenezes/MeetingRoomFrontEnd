@@ -1,21 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-
-import { SalasComponent } from './salas/salas.component';
-import { SalaComponent } from './salas/sala/sala.component';
-import { ReservaComponent } from './reserva/reserva.component';
 import { ReactiveFormsModule } from '@angular/forms';
+
+import { ListaSalasComponent } from './salas/lista-salas/lista-salas.component';
 import { HorarioSalaComponent } from './salas/horario-sala/horario-sala.component';
 import { MenuAplicacao } from './menu-apliccao/menu-aplicacao.component';
+import { SalaComponent } from './salas/sala/sala.component';
+import { CadastroReservaComponent } from './reservas/cadastro-reserva/cadastro-reserva.component';
+import { DetalhesReservaComponent } from './reservas/detalhes-reserva/detalhes-reserva.component';
 
 @NgModule({
     declarations: [
         MenuAplicacao,
-        SalasComponent,
+        ListaSalasComponent,
         SalaComponent,
-        ReservaComponent,
+        CadastroReservaComponent,
         HorarioSalaComponent,
+        DetalhesReservaComponent
     ],
     imports: [
         CommonModule,

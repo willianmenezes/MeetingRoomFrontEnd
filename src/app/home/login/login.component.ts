@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
                 }
 
             }, (erro) => {
-                alertfy.danger('Erro ao efetuar login.');
+                alertfy.danger(erro.error.Message);
                 console.log(erro);
             });
     }

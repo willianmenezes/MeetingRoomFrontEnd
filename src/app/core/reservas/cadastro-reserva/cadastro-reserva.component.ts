@@ -1,21 +1,23 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges, Renderer2, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { formatDate } from '@angular/common';
-
-import { Reserva } from 'src/app/Models/Reserva';
-import { SalasService } from '../salas/salas.service';
-import { Sala } from 'src/app/Models/Sala';
-import { ReservaService } from './reserva.service';
-import { UserService } from '../user/user.service';
 import { ActivatedRoute } from '@angular/router';
 import * as  alertfy from 'alertifyjs';
 
+import { Reserva } from 'src/app/Models/Reserva';
+import { SalasService } from '../../salas/salas.service';
+import { Sala } from 'src/app/Models/Sala';
+import { UserService } from '../../user/user.service';
+import { CadastroReservaService } from './cadastro-reserva.service';
+
+declare const $: any;
+
 @Component({
-    selector: 'app-reserva',
-    templateUrl: './reserva.component.html',
-    styleUrls: ['./reserva.component.css']
+    selector: 'app-cadastro-reserva',
+    templateUrl: './cadastro-reserva.component.html',
+    styleUrls: ['./cadastro-reserva.component.css']
 })
-export class ReservaComponent implements OnInit, OnChanges {
+export class CadastroReservaComponent implements OnInit, OnChanges {
     // classe responsável por reservar um ou mais horarios das salas
 
     @Input() reserva: Reserva;
@@ -28,7 +30,7 @@ export class ReservaComponent implements OnInit, OnChanges {
         private fb: FormBuilder,
         private renderer: Renderer2,
         private salasService: SalasService,
-        private reservaService: ReservaService,
+        private cadastroReservaService: CadastroReservaService,
         private userService: UserService,
         private activatedRoute: ActivatedRoute
     ) { }
@@ -122,15 +124,16 @@ export class ReservaComponent implements OnInit, OnChanges {
         reserva.nidSala = this.activatedRoute.snapshot.params.id;
 
 
-        this.reservaService
+        this.cadastroReservaService
             .postReserva(reserva)
             .subscribe((response) => {
 
                 alertfy.success('Login realizado com sucesso.');
                 // Emitindo true para atualizar os horarios
-                this.reservaService.setStatusAtualizacao(true);
+                this.cadastroReservaService.setStatusAtualizacao(true);
+                $('#modalReserva').modal('hide');
             }, (erro) => {
-                alertfy.danger('Erro ao reservar sala.');
+                alertfy.danger(erro.error.Message);
                 console.log(erro);
             });
     }

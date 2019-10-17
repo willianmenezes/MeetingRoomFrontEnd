@@ -5,9 +5,9 @@ import * as  alertfy from 'alertifyjs';
 
 import { HorarioSalaService } from './horario-sala.service';
 import { Reserva } from 'src/app/Models/Reserva';
-import { ReservaService } from '../../reserva/reserva.service';
-
-declare const $: any;
+import { CadastroReservaService } from '../../reservas/cadastro-reserva/cadastro-reserva.service';
+import { SalasService } from '../salas.service';
+import { Sala } from 'src/app/Models/Sala';
 
 @Component({
     selector: 'app-horario-sala',
@@ -17,6 +17,7 @@ declare const $: any;
 export class HorarioSalaComponent implements OnInit {
 
     idSala: number;
+    sala: Sala;
     reservas: Reserva[];
     reservaClicado: Reserva;
     statusAtualizacao$: Observable<boolean>; //escutador de eventos
@@ -25,10 +26,11 @@ export class HorarioSalaComponent implements OnInit {
     constructor(
         private activatedRoute: ActivatedRoute,
         private horarioService: HorarioSalaService,
-        private reservaService: ReservaService
+        private cadastroReservaService: CadastroReservaService,
+        private salaService: SalasService
 
     ) {
-        this.statusAtualizacao$ = this.reservaService.getStatusAtualizacao();
+        this.statusAtualizacao$ = this.cadastroReservaService.getStatusAtualizacao();
 
         // apos a emissão do dado atualiza a view
         this.statusAtualizacao$
@@ -36,17 +38,18 @@ export class HorarioSalaComponent implements OnInit {
 
                 if (status == true) {
                     this.buscaHorarios();
-                    $('#modalReserva').modal('hide');
                 }
-                
-            },(erro) => {
-                alertfy.danger('Erro ao buscar os horarios das salas.');
+
+            }, (erro) => {
+                alertfy.danger(erro.error.Message);
                 console.log(erro);
             });
     }
 
     ngOnInit(): void {
         this.idSala = this.activatedRoute.snapshot.params.id;
+
+        this.buscaSalaById(this.activatedRoute.snapshot.params.id);
 
         this.buscaHorarios();
     }
@@ -56,8 +59,25 @@ export class HorarioSalaComponent implements OnInit {
             .getReservaByidSala(this.idSala)
             .subscribe((reservas: Reserva[]) => {
                 this.reservas = reservas;
-            },(erro) => {
-                alertfy.danger('Erro ao buscar os horarios das salas.');
+            }, (erro) => {
+                alertfy.danger(erro.error.Message);
+                console.log(erro);
+            });
+    }
+
+    buscaSalaById(id: number) {
+        this.salaService
+            .getById(id)
+            .subscribe((sala: Sala) => {
+
+                if (sala != null && sala != undefined) {
+                    this.sala = sala;
+                } else {
+                    alertfy.danger('Erro ao buscar o nome da sala.');
+                }
+
+            }, (erro) => {
+                alertfy.danger(erro.error.Message);
                 console.log(erro);
             });
     }

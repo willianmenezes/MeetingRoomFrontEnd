@@ -8,7 +8,7 @@ import { Reserva } from 'src/app/Models/Reserva';
 @Injectable({
     providedIn: 'root'
 })
-export class ReservaService {
+export class CadastroReservaService {
 
     //Emissor de eventos
     statusAtualizacao = new BehaviorSubject<boolean>(false);

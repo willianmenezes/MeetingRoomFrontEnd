@@ -1,15 +1,19 @@
 <div class="row m-0 mr-3">
     <div class="col-12 mt-3">
-        <h2>Horários</h2>
+        <div><h2>Horários - {{sala.snome}}</h2></div>
+        <div>
+            <button class="btn btn-primary btn-sm"></button> - Livre <br>
+            <button class="btn btn-danger btn-sm"></button> - Ocupada
+        </div>
         <hr>
     </div>
     <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 m-0 p-0" *ngFor="let reserva of reservas">
-        <div class="card mt-3 ml-3 mb-3 mr-0" [ngClass]="{  'border-primary': reserva.nidReserva == 0,
+        <div class="card mt-3 ml-3 mb-3 mr-0"  [ngClass]="{  'border-primary': reserva.nidReserva == 0,
                                                             'border-danger': reserva.nidReserva > 0}">
             <div class="card-header text-light" [ngClass]="{'bg-primary': reserva.nidReserva == 0, 
                                                             'bg-danger': reserva.nidReserva > 0}">
                 <div class="row d-flex align-items-center justify-content-between">
-                    <div class="small">
+                    <div class="small col-12">
                         <span *ngIf="reserva.nidReserva == 0">
                             <strong>Titulo:</strong>Livre <br>
                             <strong>Horário:</strong>{{reserva.ddataHoraIni | date:'hh:mm'}} até
@@ -21,9 +25,9 @@
                             {{reserva.ddataHoraFim | date:'shortTime'}}
                         </span>
                     </div>
-                    <div class="p-0">
-                        <button class="btn btn-dark btn-sm" data-toggle="modal" data-target="#modalReserva" (click)="chamarModalReserva(reserva)"
-                            [disabled]="reserva.nidReserva > 0">Agendar</button>
+                    <div class="col-12 mt-2">
+                        <button *ngIf="reserva.nidReserva == 0" class="btn btn-dark btn-sm" data-toggle="modal" data-target="#modalReserva" (click)="chamarModalReserva(reserva)">Reservar</button>
+                        <button *ngIf="reserva.nidReserva > 0" class="btn btn-dark btn-sm" data-toggle=".modal-sm" data-toggle="modal" data-target="#modalDetalhesReserva" (click)="chamarModalReserva(reserva)">Detalhes</button>
                     </div>
                 </div>
             </div>
@@ -31,4 +35,5 @@
     </div>
 </div>
 
-<app-reserva [reserva]="reservaClicado"></app-reserva>
+<app-cadastro-reserva [reserva]="reservaClicado"></app-cadastro-reserva>
+<app-detalhes-reserva [reserva]="reservaClicado"></app-detalhes-reserva>

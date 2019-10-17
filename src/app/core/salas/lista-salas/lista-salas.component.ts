@@ -2,16 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import * as  alertfy from 'alertifyjs';
 
 import { Sala } from 'src/app/Models/Sala';
-import { SalasService } from './salas.service';
+import { SalasService } from '../salas.service';
 
 declare const $: any;
 
 @Component({
-    selector: 'app-salas',
-    templateUrl: './salas.component.html',
-    styleUrls: ['./salas.component.css']
+    selector: 'app-lista-salas',
+    templateUrl: './lista-salas.component.html',
+    styleUrls: ['./lista-salas.component.css']
 })
-export class SalasComponent implements OnInit {
+export class ListaSalasComponent implements OnInit {
 
     // Classe responsável por listas todas as salas
     salas: Sala[];
@@ -30,7 +30,7 @@ export class SalasComponent implements OnInit {
             .subscribe((salas: Sala[]) => {
                 this.salas = salas;
             }, (erro) => {
-                alertfy.danger('Erro ao buscar as salas.');
+                alertfy.danger(erro.error.Message);
                 console.log(erro);
             });
     }
