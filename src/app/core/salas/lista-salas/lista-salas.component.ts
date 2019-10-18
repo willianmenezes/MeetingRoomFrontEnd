@@ -3,6 +3,7 @@ import * as  alertfy from 'alertifyjs';
 
 import { Sala } from 'src/app/Models/Sala';
 import { SalasService } from '../salas.service';
+import { CadastrarSalaService } from '../cadastrar-sala/cadastrar-sala.service';
 
 declare const $: any;
 
@@ -17,11 +18,21 @@ export class ListaSalasComponent implements OnInit {
     salas: Sala[];
 
     constructor(
-        private salasService: SalasService
+        private salasService: SalasService,
+        private cadastrarSalaService: CadastrarSalaService
     ) { }
 
     ngOnInit(): void {
-        this.buscaSalas();
+
+        this.cadastrarSalaService
+            .getStatusSala()
+            .subscribe((statusSala: boolean) => {
+                if (statusSala == true) {
+                    this.buscaSalas();
+                }
+            });
+
+            this.buscaSalas();
     }
 
     buscaSalas() {

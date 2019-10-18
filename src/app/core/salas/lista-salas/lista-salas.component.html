@@ -1,11 +1,21 @@
-<div class="row pl-3 pr-3 mt-3">
+<div class="row m-0 p-0">
+    <div class="col-12 d-flex justify-content-between mt-3 pl-3 pr-3">
+        <div>
+            <h2>Salas de reunião</h2>
+
+        </div>
+        <div>
+            <button class="btn btn-dark btn-sm" data-toggle="modal" data-target="#modalCadastrarSala">Cadastrar</button>
+        </div>
+    </div>
     <div class="col-12">
-        <h2>Salas de reunião</h2>
         <hr>
     </div>
 </div>
 <div class="row m-0 mr-3">
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3" *ngFor="let sl of salas">
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 m-0 p-0" *ngFor="let sl of salas">
         <app-sala [salaInput]="sl"></app-sala>
     </div>
 </div>
+
+<app-cadastrar-sala></app-cadastrar-sala>

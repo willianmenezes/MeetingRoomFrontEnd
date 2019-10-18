@@ -23,8 +23,8 @@ export class SenhaComponent implements OnInit {
 
     ngOnInit(): void {
         this.formSenha = this.fb.group({
-            email: ['', [Validators.required, Validators.maxLength(50)]],
-            password: ['', [Validators.required, Validators.maxLength(50)]]
+            email: ['', [Validators.required, Validators.maxLength(15)]],
+            password: ['', [Validators.required, Validators.maxLength(15)]]
         })
     }
     alterarSenha() {

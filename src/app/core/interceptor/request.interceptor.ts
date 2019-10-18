@@ -74,7 +74,7 @@ export class RequestInterceptor implements HttpInterceptor {
                         } else {
                             this.tokenService.deleteToken();
                             this.router.navigate(['']);
-
+                            alertfy.warning("Sessão expidara. Realize o login novamente.");
                         }
                     }));
             } else if (error.status == 0 && error.statusText == "Unknown Error") {

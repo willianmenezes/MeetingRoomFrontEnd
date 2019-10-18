@@ -40,24 +40,25 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">
-                                <label for="inputTitulo" class="small">Título da reserva:</label>
-                                <textarea type="email" class="form-control" id="inputTitulo" maxlength="50"
-                                    aria-describedby="emailHelp" formControlName="Stitulo"></textarea>
+                                <label for="txtTitulo" class="small">Título da reserva:</label>
+                                <textarea #txtTitulo type="email" class="form-control" id="txtTitulo" maxlength="50"
+                                placeholder="Título de no minímo 5 caracteres." aria-describedby="emailHelp" formControlName="Stitulo"></textarea>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">
-                                <label for="inputEmail" class="small">Descrição:</label>
-                                <textarea type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" maxlength="300"
+                                <label for="txtDescricao" class="small">Descrição:</label>
+                                <textarea #txtDescricao type="email" class="form-control" id="txtDescricao" aria-describedby="emailHelp" maxlength="300"
+                                    placeholder="Descrição de no minímo 10 caracteres."
                                     formControlName="Sdescricao"></textarea>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-dark" data-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-dark" data-dismiss="modal" (click)="limparClassesErros()">Fechar</button>
                     <button type="submit" class="btn btn-primary" [disabled]="formReserva.invalid">Salvar</button>
                 </div>
             </form>

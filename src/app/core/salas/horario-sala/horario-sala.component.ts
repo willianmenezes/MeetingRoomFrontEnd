@@ -22,9 +22,7 @@ export class HorarioSalaComponent implements OnInit {
     idSala: number;
     sala: Sala;
     reservas: Reserva[];
-    reservaClicado: Reserva;
     statusAtualizacao$: Observable<boolean>; //escutador de eventos
-    @ViewChild('inputData', { static: true }) inputData: HTMLInputElement;
 
 
     constructor(
@@ -41,6 +39,10 @@ export class HorarioSalaComponent implements OnInit {
             .subscribe((status) => {
 
                 if (status == true) {
+                    if ($("#inputData").val() == "") {
+                        $("#inputData").val(formatDate(new Date(), 'yyyy-MM-dd', 'en-US'));
+                    }
+
                     this.buscaHorariosByIdDate($("#inputData").val());
                 }
 
@@ -91,13 +93,13 @@ export class HorarioSalaComponent implements OnInit {
 
     // dados para seram passados para o modal
     chamarModalReserva(reserva: Reserva) {
-        this.reservaClicado = reserva;
-        this.reservaClicado.nidSala = this.idSala;
+        reserva.nidSala = this.idSala;
+        this.horarioService.setReservaClicado(reserva);
     }
 
     buscaHorariosByIdDate(data: string) {
 
-        if (!data == undefined || data != "") {
+        if (!data == undefined && data != "") {
 
             let arraydata = data.split('-');
             let dataAgenda = new Date(parseInt(arraydata[0]), parseInt(arraydata[1]) - 1, parseInt(arraydata[2]));

@@ -10,6 +10,8 @@ import { Sala } from 'src/app/Models/Sala';
 import { UserService } from '../../user/user.service';
 import { CadastroReservaService } from './cadastro-reserva.service';
 import { DateHelperService } from 'src/app/helpers/date-helper.service';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { HorarioSalaService } from '../../salas/horario-sala/horario-sala.service';
 
 declare const $: any;
 
@@ -18,13 +20,15 @@ declare const $: any;
     templateUrl: './cadastro-reserva.component.html',
     styleUrls: ['./cadastro-reserva.component.css']
 })
-export class CadastroReservaComponent implements OnInit, OnChanges {
+export class CadastroReservaComponent implements OnInit {
     // classe responsável por reservar um ou mais horarios das salas
 
-    @Input() reserva: Reserva;
+    reserva: Reserva;
     @ViewChild('inputDtaIni', { static: false }) inputDtaIni: ElementRef;
     @ViewChild('inputDtaFim', { static: false }) inputDtaFim: ElementRef;
     @ViewChild('inputSala', { static: false }) inputSala: ElementRef;
+    @ViewChild('txtTitulo', { static: false }) txtTitulo: ElementRef;
+    @ViewChild('txtDescricao', { static: false }) txtDescricao: ElementRef;
     formReserva: FormGroup;
 
     constructor(
@@ -34,34 +38,11 @@ export class CadastroReservaComponent implements OnInit, OnChanges {
         private cadastroReservaService: CadastroReservaService,
         private userService: UserService,
         private activatedRoute: ActivatedRoute,
-        private dateHelperService: DateHelperService
+        private dateHelperService: DateHelperService,
+        private horarioSalaService: HorarioSalaService
     ) { }
 
-    // captura mudanças no @Input
-    ngOnChanges(changes: SimpleChanges): void {
-        if (changes.reserva && this.reserva != undefined) {
-
-            this.formReserva.get('DdataHoraIni').setValue(this.formataData(this.reserva.ddataHoraIni.toString()));
-            this.formReserva.get('DdataHoraFim').setValue(this.formataData(this.reserva.ddataHoraFim.toString()));
-            this.formReserva.get('Sdescricao').setValue('');
-            this.formReserva.get('Stitulo').setValue('');  
-
-            // Buscando a sala para usar o nome
-            this.salasService
-                .getById(this.reserva.nidSala)
-                .subscribe((sala: Sala) => {
-                    this.formReserva.get('NidSala').setValue(`${sala.nidSala} - ${sala.snome}`);
-                });
-
-            // desabilitando campos que são preenchidos automáticos
-            this.renderer.setAttribute(this.inputDtaIni.nativeElement, 'disabled', '');
-            this.renderer.setAttribute(this.inputDtaFim.nativeElement, 'disabled', '');
-            this.renderer.setAttribute(this.inputSala.nativeElement, 'disabled', '');
-
-        }
-    }
-
-    formataData(data: string){
+    formataData(data: string) {
         return this.dateHelperService.formataData(data);
     }
 
@@ -98,6 +79,37 @@ export class CadastroReservaComponent implements OnInit, OnChanges {
                 ]
             ]
         });
+
+        this.horarioSalaService
+            .getReservaClicado()
+            .subscribe((reserva: Reserva) => {
+
+                if (reserva != null) {
+
+                    this.reserva = reserva;
+
+                    this.formReserva.get('DdataHoraIni').setValue(this.formataData(this.reserva.ddataHoraIni.toString()));
+                    this.formReserva.get('DdataHoraFim').setValue(this.formataData(this.reserva.ddataHoraFim.toString()));
+                    this.formReserva.get('Sdescricao').setValue('');
+                    this.formReserva.get('Stitulo').setValue('');
+
+                    // Buscando a sala para usar o nome
+                    this.salasService
+                        .getById(this.reserva.nidSala)
+                        .subscribe((sala: Sala) => {
+                            this.formReserva.get('NidSala').setValue(`${sala.nidSala} - ${sala.snome}`);
+                        });
+
+                    // desabilitando campos que são preenchidos automáticos
+                    this.renderer.setAttribute(this.inputDtaIni.nativeElement, 'disabled', '');
+                    this.renderer.setAttribute(this.inputDtaFim.nativeElement, 'disabled', '');
+                    this.renderer.setAttribute(this.inputSala.nativeElement, 'disabled', '');
+                }
+
+            }, (erro) => {
+                console.log(erro);
+                alertfy.error("Erro ao buscar a reserva.")
+            });
     }
 
     reservar() {
@@ -122,10 +134,15 @@ export class CadastroReservaComponent implements OnInit, OnChanges {
                 // Emitindo true para atualizar os horarios
                 this.cadastroReservaService.setStatusAtualizacao(true);
                 $('#modalReserva').modal('hide');
+                this.formReserva.reset();
 
             }, (erro) => {
                 alertfy.error(erro.error.Message);
                 console.log(erro);
             });
+    }
+
+    limparClassesErros() {
+        this.formReserva.reset();
     }
 }

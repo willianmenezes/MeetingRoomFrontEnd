@@ -25,6 +25,38 @@ html,body{
 }
 /* final configurações no alertfy*/
 
+/*Formatação input com erros*/
+input:focus, select:focus{
+  box-shadow: none !important;
+}
+
+input.ng-invalid.ng-dirty.ng-touched{
+  border-color: red;
+  box-shadow: none;
+}
+
+input.ng-pristine.ng-invalid.ng-touched{
+  border-color: red;
+  box-shadow: none;
+}
+
+textarea:focus, textarea:focus{
+  box-shadow: none !important;
+}
+
+textarea.ng-invalid.ng-dirty.ng-touched{
+  border-color: red;
+  box-shadow: none;
+}
+
+textarea.ng-pristine.ng-invalid.ng-touched{
+  border-color: red;
+  box-shadow: none;
+}
+/*Formatação input com erros*/
+
+
+
 /*INICIO CSS RESET */
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 

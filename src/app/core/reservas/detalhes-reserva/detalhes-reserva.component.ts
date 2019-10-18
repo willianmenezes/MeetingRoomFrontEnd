@@ -4,6 +4,7 @@ import * as  alertfy from 'alertifyjs';
 import { Reserva } from 'src/app/Models/Reserva';
 import { DetalhesReservaService } from './detalhes-reserva.service';
 import { CadastroReservaService } from '../cadastro-reserva/cadastro-reserva.service';
+import { HorarioSalaService } from '../../salas/horario-sala/horario-sala.service';
 
 declare const $: any;
 
@@ -12,24 +13,25 @@ declare const $: any;
     templateUrl: './detalhes-reserva.component.html',
     styleUrls: ['./detalhes-reserva.component.css']
 })
-export class DetalhesReservaComponent implements OnInit, OnChanges {
+export class DetalhesReservaComponent implements OnInit {
 
-    @Input() reservaInput: Reserva;
     reserva: Reserva;
 
     constructor(
         private detalhesReservaService: DetalhesReservaService,
         private cadastroReservaService: CadastroReservaService,
+        private horarioSalaService: HorarioSalaService
     ) { }
 
-    ngOnChanges(changes: SimpleChanges): void {
-        if (changes.reservaInput && this.reservaInput != undefined) {
-            this.reserva = this.reservaInput;
-        }
-    }
-
     ngOnInit(): void {
-
+        this.horarioSalaService
+            .getReservaClicado()
+            .subscribe((reserva: Reserva) => {
+                this.reserva = reserva;
+            }, (erro) => {
+                console.log(erro);
+                alertfy.error("Erro ao buscar a reserva.")
+            });
     }
 
     deletarReserva() {
