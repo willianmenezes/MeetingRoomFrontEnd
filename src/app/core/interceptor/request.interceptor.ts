@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import * as alertfy from 'alertifyjs';
 
 import { TokenService } from '../token/token.service';
 import { Router } from '@angular/router';
@@ -42,8 +43,6 @@ export class RequestInterceptor implements HttpInterceptor {
         //verificando erros do retorno para fazer ou não uma nova requisição
         return next.handle(req).pipe(catchError((error) => {
 
-            console.log(error);
-
             if (error.status == 401 && error.statusText == "OK") {
 
                 //buscando o email do usuário no token armazenado
@@ -78,6 +77,11 @@ export class RequestInterceptor implements HttpInterceptor {
 
                         }
                     }));
+            } else if (error.status == 0 && error.statusText == "Unknown Error") {
+                alertfy.error("Servidor indisponível.");
+                this.tokenService.deleteToken();
+                this.router.navigate(['']);
+
             } else {
                 throw error;
             }

@@ -37,14 +37,14 @@ export class DetalhesReservaComponent implements OnInit, OnChanges {
             .deleteReserva(this.reserva.nidReserva)
             .subscribe((reserva: Reserva) => {
                 if (reserva == null || reserva == undefined) {
-                    alertfy.success('Reserva não encontrada, impossível excluir.');
+                    alertfy.error('Reserva não encontrada, impossível excluir.');
                 } else {
-                    alertfy.danger('Reserva excluida com sucesso.');
+                    alertfy.success('Reserva excluida com sucesso.');
                     this.cadastroReservaService.setStatusAtualizacao(true);
                     $('#modalDetalhesReserva').modal('hide');
                 }
             }, (erro) => {
-                alertfy.danger(erro.error.Message);
+                alertfy.error(erro.error.Message);
                 console.log(erro);
             })
     }

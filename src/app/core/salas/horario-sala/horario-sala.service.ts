@@ -18,4 +18,9 @@ export class HorarioSalaService {
     getReservaByidSala(idSala: number) {
         return this.http.get<Reserva[]>(`${URL_API}Reservas/${idSala}`);
     }
+
+
+    getReservaByIdSalaDate(idSala: number, dataAgenda: Date) {
+        return this.http.post<Reserva[]>(`${URL_API}Reservas/Data/${idSala}`, JSON.stringify(dataAgenda), { observe: 'body' });
+    }
 }

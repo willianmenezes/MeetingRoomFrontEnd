@@ -9,6 +9,7 @@ import { SalasService } from '../../salas/salas.service';
 import { Sala } from 'src/app/Models/Sala';
 import { UserService } from '../../user/user.service';
 import { CadastroReservaService } from './cadastro-reserva.service';
+import { DateHelperService } from 'src/app/helpers/date-helper.service';
 
 declare const $: any;
 
@@ -32,7 +33,8 @@ export class CadastroReservaComponent implements OnInit, OnChanges {
         private salasService: SalasService,
         private cadastroReservaService: CadastroReservaService,
         private userService: UserService,
-        private activatedRoute: ActivatedRoute
+        private activatedRoute: ActivatedRoute,
+        private dateHelperService: DateHelperService
     ) { }
 
     // captura mudanças no @Input
@@ -42,7 +44,7 @@ export class CadastroReservaComponent implements OnInit, OnChanges {
             this.formReserva.get('DdataHoraIni').setValue(this.formataData(this.reserva.ddataHoraIni.toString()));
             this.formReserva.get('DdataHoraFim').setValue(this.formataData(this.reserva.ddataHoraFim.toString()));
             this.formReserva.get('Sdescricao').setValue('');
-            this.formReserva.get('Stitulo').setValue('');
+            this.formReserva.get('Stitulo').setValue('');  
 
             // Buscando a sala para usar o nome
             this.salasService
@@ -57,6 +59,10 @@ export class CadastroReservaComponent implements OnInit, OnChanges {
             this.renderer.setAttribute(this.inputSala.nativeElement, 'disabled', '');
 
         }
+    }
+
+    formataData(data: string){
+        return this.dateHelperService.formataData(data);
     }
 
     ngOnInit(): void {
@@ -94,23 +100,6 @@ export class CadastroReservaComponent implements OnInit, OnChanges {
         });
     }
 
-    // formata uma data em um formato reconhecido pelo input
-    formataData(data: string) {
-        let array = data.split('-');
-
-        let ano = parseInt(array[0]);
-        let mes = parseInt(array[1]) - 1;
-        let dia = parseInt(array[2].substr(0, 2));
-        let hora = parseInt(array[2].substr(3, 2));
-        let min = parseInt(array[2].substr(6, 2));
-
-        let novaData = new Date(ano, mes, dia, hora, min);
-
-        let dataFormatada = formatDate(novaData.toString(), 'yyyy-MM-ddTHH:mm', 'en-US');
-
-        return dataFormatada;
-    }
-
     reservar() {
 
         let reserva: Reserva = new Reserva();
@@ -135,7 +124,7 @@ export class CadastroReservaComponent implements OnInit, OnChanges {
                 $('#modalReserva').modal('hide');
 
             }, (erro) => {
-                alertfy.danger(erro.error.Message);
+                alertfy.error(erro.error.Message);
                 console.log(erro);
             });
     }

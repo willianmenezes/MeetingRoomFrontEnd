@@ -18,5 +18,4 @@ export class SalasService {
     getById(id: number) {
         return this.http.get<Sala>(URL_API + 'Salas/' + id);
     }
-
 }
