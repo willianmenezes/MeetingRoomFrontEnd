@@ -11,6 +11,7 @@ import { CadastroReservaComponent } from './reservas/cadastro-reserva/cadastro-r
 import { DetalhesReservaComponent } from './reservas/detalhes-reserva/detalhes-reserva.component';
 import { SenhaComponent } from './user/senha/senha.component';
 import { CadastrarSalaComponent } from './salas/cadastrar-sala/cadastrar-sala.component';
+import { CadastroReservaListaComponent } from './reservas/cadastro-reserva-lista/cadastro-reserva-lista.component';
 
 @NgModule({
     declarations: [
@@ -21,7 +22,8 @@ import { CadastrarSalaComponent } from './salas/cadastrar-sala/cadastrar-sala.co
         HorarioSalaComponent,
         DetalhesReservaComponent,
         SenhaComponent,
-        CadastrarSalaComponent
+        CadastrarSalaComponent,
+        CadastroReservaListaComponent
     ],
     imports: [
         CommonModule,

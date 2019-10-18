@@ -23,7 +23,8 @@ export class HorarioSalaComponent implements OnInit {
     sala: Sala;
     reservas: Reserva[];
     statusAtualizacao$: Observable<boolean>; //escutador de eventos
-
+    reservasCadastro: Reserva[] = [];
+    statusBotaoReservas: boolean;
 
     constructor(
         private activatedRoute: ActivatedRoute,
@@ -44,6 +45,10 @@ export class HorarioSalaComponent implements OnInit {
                     }
 
                     this.buscaHorariosByIdDate($("#inputData").val());
+                    
+                    // resetando array e ocultando botao
+                    this.reservasCadastro = [];
+                    this.horarioService.setBotaoReserva(false);
                 }
 
             }, (erro) => {
@@ -54,8 +59,19 @@ export class HorarioSalaComponent implements OnInit {
 
     ngOnInit(): void {
 
+        // resetando array e ocultando botao
+        this.reservasCadastro = [];
+        this.horarioService.setBotaoReserva(false);
+
+        this.horarioService
+            .getBotaoReserva()
+            .subscribe((status: boolean) => {
+                this.statusBotaoReservas = status;
+            })
+
         this.idSala = this.activatedRoute.snapshot.params.id;
 
+        // busca o nome da sala para exibir no topo do componente
         this.buscaSalaById(this.activatedRoute.snapshot.params.id);
 
         this.buscaHorarios();
@@ -67,6 +83,8 @@ export class HorarioSalaComponent implements OnInit {
         this.horarioService
             .getReservaByidSala(this.activatedRoute.snapshot.params.id)
             .subscribe((reservas: Reserva[]) => {
+                console.log(reservas);
+
                 this.reservas = reservas;
             }, (erro) => {
                 alertfy.error(erro.error.Message);
@@ -99,7 +117,7 @@ export class HorarioSalaComponent implements OnInit {
 
     buscaHorariosByIdDate(data: string) {
 
-        if (!data == undefined && data != "") {
+        if (data != undefined && data != "") {
 
             let arraydata = data.split('-');
             let dataAgenda = new Date(parseInt(arraydata[0]), parseInt(arraydata[1]) - 1, parseInt(arraydata[2]));
@@ -114,5 +132,37 @@ export class HorarioSalaComponent implements OnInit {
                 });
         }
 
+    }
+
+    // seleciona as reservas para cadastyrar em grupo
+    selecionarReservas(checked: boolean, reserva: Reserva) {
+
+        if (checked) {
+
+            this.reservasCadastro.push(reserva);
+
+        } else {
+
+            let index = this.reservasCadastro.indexOf(reserva);
+
+            this.reservasCadastro.splice(index);
+        }
+
+        if (this.reservasCadastro.length > 0) {
+            this.horarioService.setBotaoReserva(true);
+        } else {
+            this.horarioService.setBotaoReserva(false);
+        }
+    }
+
+    reservarLista() {
+
+        // inserindo o id da sala em cada reserva
+        this.reservasCadastro = this.reservasCadastro.map((reservarLista) => {
+            reservarLista.nidSala = this.idSala;
+            return reservarLista;
+        });
+
+        this.horarioService.setReservasLista(this.reservasCadastro);
     }
 }

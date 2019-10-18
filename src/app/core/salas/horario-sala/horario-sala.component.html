@@ -6,13 +6,16 @@
 </div>
 <div class="row p-0 m-0">
     <div class="col-12 d-flex justify-content-between">
-        <div>
+        <div class="">
             <button class="btn btn-primary btn-sm"></button> - <span>Livre</span><br>
             <button class="btn btn-danger btn-sm"></button> - <span class="mt-2 d-inline-block">Ocupada</span>
         </div>
         <div class="">
             <label for="inputData" class="font-weight-bold">Data: </label>
-            <input type="date" class="form-control" id="inputData" (change)="buscaHorariosByIdDate($event.target.value)">
+            <input type="date" class="form-control" id="inputData"
+                (change)="buscaHorariosByIdDate($event.target.value)">
+            <button class="btn btn-dark btn-sm mt-2 btn-block" *ngIf="statusBotaoReservas" (click)="reservarLista()"
+                data-toggle="modal" data-target="#modalReservaLista">Reservar selecionados</button>
         </div>
     </div>
     <div class="col-12">
@@ -26,18 +29,24 @@
 
             <div class="card-header text-light" [ngClass]="{'bg-primary': reserva.nidReserva == 0, 
                                                             'bg-danger': reserva.nidReserva > 0}">
+                <div class="input-check-position">
+                    <input type="checkbox" name="" id="" (click)="selecionarReservas($event.target.checked, reserva)"
+                        [disabled]="reserva.nidReserva > 0">
+                </div>
 
                 <div class="row d-flex align-items-center justify-content-between">
-                    <div class="small col-12">
+                    <div class="small col-12 mt-1">
                         <span *ngIf="reserva?.nidReserva == 0">
                             <strong>Titulo:</strong> Livre <br>
                             <strong>Horário:</strong> {{reserva?.ddataHoraIni | date:'hh:mm'}} até
-                            {{reserva?.ddataHoraFim | date:'shortTime'}}
+                            {{reserva?.ddataHoraFim | date:'shortTime'}} <br>
+                            <strong>Registrado por:</strong> - 
                         </span>
                         <span *ngIf="reserva?.nidReserva > 0">
                             <strong>Titulo:</strong> {{reserva?.stitulo}} <br>
                             <strong>Horário:</strong> {{reserva?.ddataHoraIni | date:'hh:mm'}} até
-                            {{reserva?.ddataHoraFim | date:'shortTime'}}
+                            {{reserva?.ddataHoraFim | date:'shortTime'}} <br>
+                            <strong>Registrado por:</strong> {{reserva?.nidPessoaNavigation.sapelido}}
                         </span>
                     </div>
                     <div class="col-12 mt-2">
@@ -55,3 +64,4 @@
 
 <app-cadastro-reserva></app-cadastro-reserva>
 <app-detalhes-reserva></app-detalhes-reserva>
+<app-cadastro-reserva-lista></app-cadastro-reserva-lista>

@@ -27,8 +27,6 @@ export class CadastroReservaComponent implements OnInit {
     @ViewChild('inputDtaIni', { static: false }) inputDtaIni: ElementRef;
     @ViewChild('inputDtaFim', { static: false }) inputDtaFim: ElementRef;
     @ViewChild('inputSala', { static: false }) inputSala: ElementRef;
-    @ViewChild('txtTitulo', { static: false }) txtTitulo: ElementRef;
-    @ViewChild('txtDescricao', { static: false }) txtDescricao: ElementRef;
     formReserva: FormGroup;
 
     constructor(

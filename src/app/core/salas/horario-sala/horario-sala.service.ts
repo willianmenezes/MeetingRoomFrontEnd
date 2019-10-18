@@ -12,6 +12,8 @@ export class HorarioSalaService {
 
     idAgenda: number;
     reserva = new BehaviorSubject<Reserva>(null);
+    reservasLista = new BehaviorSubject<Reserva[]>(null);
+    botaoReservas = new BehaviorSubject<boolean>(false);
 
     constructor(
         private http: HttpClient
@@ -31,5 +33,21 @@ export class HorarioSalaService {
 
     getReservaClicado() {
         return this.reserva.asObservable();
+    }
+
+    setBotaoReserva(status: boolean) {
+        this.botaoReservas.next(status);
+    }
+
+    getBotaoReserva() {
+        return this.botaoReservas.asObservable();
+    }
+
+    setReservasLista(reservas: Reserva[]) {
+        this.reservasLista.next(reservas);
+    }
+
+    getReservasLista() {
+        return this.reservasLista.asObservable();
     }
 }

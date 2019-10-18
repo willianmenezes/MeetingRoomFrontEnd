@@ -27,6 +27,10 @@
                     {{reserva?.ddataHoraFim | date:'HH:mm'}} hrs<br>
 
                 </div>
+                <div class="border border-dark mb-2 p-1 rounded">
+                    <strong>Registrado por: </strong> {{reserva?.nidPessoaNavigation.sapelido}}
+
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-dark" data-dismiss="modal">Fechar</button>

@@ -30,5 +30,4 @@ export class CadastroReservaService {
     setStatusAtualizacao(status: boolean) {
         this.statusAtualizacao.next(status);
     }
-
 }

@@ -1,0 +1,50 @@
+<!-- Modal -->
+<div class="modal fade" id="modalReservaLista" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Reservar salas selecionadas</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form [formGroup]="formListaReserva" (submit)="reservar()">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="inputSalas" class="small">Sala:</label>
+                                <input type="text" class="form-control" id="inputSalas" aria-describedby="emailHelp"
+                                    formControlName="NidSala" #inputSalas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="txtTit" class="small">Título da reserva:</label>
+                                <textarea #txtTitulo type="email" class="form-control" id="txtTit" maxlength="50"
+                                placeholder="Título de no minímo 5 caracteres." aria-describedby="emailHelp" formControlName="Stitulo"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="txtDesc" class="small">Descrição:</label>
+                                <textarea #txtDescricao type="email" class="form-control" id="txtDesc" aria-describedby="emailHelp" maxlength="300"
+                                    placeholder="Descrição de no minímo 10 caracteres."
+                                    formControlName="Sdescricao"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-dark" data-dismiss="modal" (click)="limparClassesErros()">Fechar</button>
+                    <button type="submit" class="btn btn-primary" [disabled]="formListaReserva.invalid">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -5,6 +5,7 @@ import { Reserva } from 'src/app/Models/Reserva';
 import { DetalhesReservaService } from './detalhes-reserva.service';
 import { CadastroReservaService } from '../cadastro-reserva/cadastro-reserva.service';
 import { HorarioSalaService } from '../../salas/horario-sala/horario-sala.service';
+import { UserService } from '../../user/user.service';
 
 declare const $: any;
 
@@ -20,7 +21,8 @@ export class DetalhesReservaComponent implements OnInit {
     constructor(
         private detalhesReservaService: DetalhesReservaService,
         private cadastroReservaService: CadastroReservaService,
-        private horarioSalaService: HorarioSalaService
+        private horarioSalaService: HorarioSalaService,
+        private userService: UserService
     ) { }
 
     ngOnInit(): void {
@@ -35,8 +37,11 @@ export class DetalhesReservaComponent implements OnInit {
     }
 
     deletarReserva() {
+
+        let idUsuario = this.userService.getUser().unique_name[1];
+
         this.detalhesReservaService
-            .deleteReserva(this.reserva.nidReserva)
+            .deleteReserva(this.reserva.nidReserva, parseInt(idUsuario))
             .subscribe((reserva: Reserva) => {
                 if (reserva == null || reserva == undefined) {
                     alertfy.error('Reserva não encontrada, impossível excluir.');
