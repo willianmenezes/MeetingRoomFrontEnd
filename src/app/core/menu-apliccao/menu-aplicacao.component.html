@@ -7,7 +7,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse ml-4" id="navbarNav">
-                <ul class="navbar-nav">
+                <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
                         <a class="nav-link" [routerLink]="['salas']">Salas</a>
                     </li>
@@ -15,9 +15,20 @@
                         <a class="nav-link" [routerLink]="">Meus Agendamentos</a>
                     </li>
                 </ul>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-outline-dark dropdown-toggle text-light pl-0" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        {{apelidoUsuario}}
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <button class="dropdown-item" type="button" data-toggle="modal" data-target="#modalTrocarSenha">Alterar senha</button>
+                        <button class="dropdown-item" type="button" (click)="sair()">Sair</button>
+                    </div>
+                </div>
             </div>
         </nav>
     </div>
 </div>
+<app-senha></app-senha>
 
 <router-outlet></router-outlet>

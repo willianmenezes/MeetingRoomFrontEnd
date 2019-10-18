@@ -73,7 +73,9 @@ export class RequestInterceptor implements HttpInterceptor {
 
                             return next.handle(req);
                         } else {
-                            this.router.navigate(['/not-authorized']);
+                            this.tokenService.deleteToken();
+                            this.router.navigate(['']);
+
                         }
                     }));
             } else {

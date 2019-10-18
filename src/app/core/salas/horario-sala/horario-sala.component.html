@@ -1,6 +1,6 @@
 <div class="row m-0 mr-3">
     <div class="col-12 mt-3">
-        <div><h2>Horários - {{sala.snome}}</h2></div>
+        <div><h2>Horários - {{sala?.snome}}</h2></div>
         <div>
             <button class="btn btn-primary btn-sm"></button> - Livre <br>
             <button class="btn btn-danger btn-sm"></button> - Ocupada
@@ -14,15 +14,15 @@
                                                             'bg-danger': reserva.nidReserva > 0}">
                 <div class="row d-flex align-items-center justify-content-between">
                     <div class="small col-12">
-                        <span *ngIf="reserva.nidReserva == 0">
+                        <span *ngIf="reserva?.nidReserva == 0">
                             <strong>Titulo:</strong>Livre <br>
-                            <strong>Horário:</strong>{{reserva.ddataHoraIni | date:'hh:mm'}} até
-                            {{reserva.ddataHoraFim | date:'shortTime'}}
+                            <strong>Horário:</strong>{{reserva?.ddataHoraIni | date:'hh:mm'}} até
+                            {{reserva?.ddataHoraFim | date:'shortTime'}}
                         </span>
-                        <span *ngIf="reserva.nidReserva > 0">
-                            <strong>Titulo:</strong>{{reserva.stitulo}} <br>
-                            <strong>Horário:</strong>{{reserva.ddataHoraIni | date:'hh:mm'}} até
-                            {{reserva.ddataHoraFim | date:'shortTime'}}
+                        <span *ngIf="reserva?.nidReserva > 0">
+                            <strong>Titulo:</strong>{{reserva?.stitulo}} <br>
+                            <strong>Horário:</strong>{{reserva?.ddataHoraIni | date:'hh:mm'}} até
+                            {{reserva?.ddataHoraFim | date:'shortTime'}}
                         </span>
                     </div>
                     <div class="col-12 mt-2">
@@ -36,4 +36,4 @@
 </div>
 
 <app-cadastro-reserva [reserva]="reservaClicado"></app-cadastro-reserva>
-<app-detalhes-reserva [reserva]="reservaClicado"></app-detalhes-reserva>
+<app-detalhes-reserva [reservaInput]="reservaClicado"></app-detalhes-reserva>

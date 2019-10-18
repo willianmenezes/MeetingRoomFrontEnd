@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import * as  alertfy from 'alertifyjs';
 
 import { Reserva } from 'src/app/Models/Reserva';
@@ -12,14 +12,21 @@ declare const $: any;
     templateUrl: './detalhes-reserva.component.html',
     styleUrls: ['./detalhes-reserva.component.css']
 })
-export class DetalhesReservaComponent implements OnInit {
+export class DetalhesReservaComponent implements OnInit, OnChanges {
 
-    @Input() reserva: Reserva;
+    @Input() reservaInput: Reserva;
+    reserva: Reserva;
 
     constructor(
         private detalhesReservaService: DetalhesReservaService,
         private cadastroReservaService: CadastroReservaService,
     ) { }
+
+    ngOnChanges(changes: SimpleChanges): void {
+        if (changes.reservaInput && this.reservaInput != undefined) {
+            this.reserva = this.reservaInput;
+        }
+    }
 
     ngOnInit(): void {
 

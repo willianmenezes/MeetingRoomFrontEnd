@@ -11,20 +11,20 @@
             </div>
             <div class="modal-body">
                 <div class="border border-dark mb-2 p-1 rounded">
-                    <strong>Titulo: </strong> {{reserva.stitulo}} <br>
+                    <strong>Titulo: </strong> {{reserva?.stitulo}} <br>
 
                 </div>
                 <div class="border border-dark mb-2 p-1 rounded">
-                    <strong>Descrição: </strong> {{reserva.sdescricao}} <br>
+                    <strong>Descrição: </strong> {{reserva?.sdescricao}} <br>
 
                 </div>
                 <div class="border border-dark mb-2 p-1 rounded">
-                    <strong>Data: </strong> {{reserva.ddataHoraIni | date:'dd/MM/yyyy'}}<br>
+                    <strong>Data: </strong> {{reserva?.ddataHoraIni | date:'dd/MM/yyyy'}}<br>
 
                 </div>
                 <div class="border border-dark mb-2 p-1 rounded">
-                    <strong>Horário: </strong> {{reserva.ddataHoraIni | date:'HH:mm'}} até
-                    {{reserva.ddataHoraFim | date:'HH:mm'}} hrs<br>
+                    <strong>Horário: </strong> {{reserva?.ddataHoraIni | date:'HH:mm'}} até
+                    {{reserva?.ddataHoraFim | date:'HH:mm'}} hrs<br>
 
                 </div>
             </div>

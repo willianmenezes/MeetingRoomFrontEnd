@@ -126,12 +126,14 @@ export class CadastroReservaComponent implements OnInit, OnChanges {
 
         this.cadastroReservaService
             .postReserva(reserva)
-            .subscribe((response) => {
+            .subscribe(() => {
 
-                alertfy.success('Login realizado com sucesso.');
+                alertfy.success('Reserva realizada com sucesso.');
+
                 // Emitindo true para atualizar os horarios
                 this.cadastroReservaService.setStatusAtualizacao(true);
                 $('#modalReserva').modal('hide');
+
             }, (erro) => {
                 alertfy.danger(erro.error.Message);
                 console.log(erro);

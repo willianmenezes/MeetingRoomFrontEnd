@@ -9,6 +9,7 @@ import { MenuAplicacao } from './menu-apliccao/menu-aplicacao.component';
 import { SalaComponent } from './salas/sala/sala.component';
 import { CadastroReservaComponent } from './reservas/cadastro-reserva/cadastro-reserva.component';
 import { DetalhesReservaComponent } from './reservas/detalhes-reserva/detalhes-reserva.component';
+import { SenhaComponent } from './user/senha/senha.component';
 
 @NgModule({
     declarations: [
@@ -17,7 +18,8 @@ import { DetalhesReservaComponent } from './reservas/detalhes-reserva/detalhes-r
         SalaComponent,
         CadastroReservaComponent,
         HorarioSalaComponent,
-        DetalhesReservaComponent
+        DetalhesReservaComponent,
+        SenhaComponent
     ],
     imports: [
         CommonModule,
