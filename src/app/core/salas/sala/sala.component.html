@@ -1,9 +1,14 @@
 <div class="card  mt-3 ml-3 mb-3 mr-0 border-primary">
     <div class="card-header text-light h6 bg-primary">{{salaInput.snome}}</div>
     <div class="card-body text-dark">
-        <h5 class="card-title">Primary card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-            card's content.</p>
+        <div class="mb-2 p-1">
+            <strong>Qtd. Lugares: </strong> {{salaInput?.nqtdLugares}} <br>
+
+        </div>
+        <div class="p-1">
+            <strong>Andar: </strong> {{salaInput?.sandar}} <br>
+
+        </div>
     </div>
     <button class="btn btn-dark m-2" [routerLink]="['/home/horario-sala', salaInput.nidSala]">Agendar</button>
 </div>

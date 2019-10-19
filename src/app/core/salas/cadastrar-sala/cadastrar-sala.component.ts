@@ -23,7 +23,9 @@ export class CadastrarSalaComponent implements OnInit {
     ngOnInit(): void {
 
         this.formCadastrar = this.fb.group({
-            nomeSala: ['', [Validators.required, Validators.maxLength(50), Validators.minLength(5)]]
+            nomeSala: ['', [Validators.required, Validators.maxLength(50), Validators.minLength(5)]],
+            NqtdLugares: ['', [Validators.required]],
+            Sandar: ['', [Validators.required, Validators.maxLength(50), Validators.minLength(5)]]
         })
 
     }
@@ -32,7 +34,9 @@ export class CadastrarSalaComponent implements OnInit {
 
         let sala = new Sala();
         sala.snome = this.formCadastrar.get('nomeSala').value;
-
+        sala.Sandar = this.formCadastrar.get('Sandar').value;
+        sala.NqtdLugares = this.formCadastrar.get('NqtdLugares').value;
+        
         if (sala.snome != null || sala.snome != undefined) {
 
             this.cadastrarSalaService
