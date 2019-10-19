@@ -1,27 +1,45 @@
 # MeetingRoomFrontEnd
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.8.
+Para executar o projeto é necessário ter instalado em sua máquina o node.js e o angular/cli.
 
-## Development server
+O node.js pode ser baixado neste link [aqui](https://nodejs.org/en/).
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Verifique se foi instalado corretamente executando o seguinte comando no terminal 
+```
+  node -v
+```
+Deverá aparecer a versão instalada do node.js
 
-## Code scaffolding
+Para executar aplicações em Angular é necessário ter instalado em sua máquina o angular-cli
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Execute o seguinte comando no terminal
 
-## Build
+```
+    npm install @angular/cli
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Este projeto foi gerado com [Angular CLI](https://github.com/angular/angular-cli) versão 8.3.8.
 
-## Running unit tests
+## Executando a aplicação
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Dentro do diretório da aplicação, onde esta localizado o arquivo package.json exeute o seguinte comando:
 
-## Running end-to-end tests
+```
+  npm install
+```
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Neste momento será instalada todas as dependencias do projeto.
 
-## Further help
+Em seguida execute o comando para executar a aplicação.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+```
+  ng serve --open
+```
+
+## Observações
+
+Exite um arquivo na aplicação que se chama "app-api.ts" nele esta configurada a URL de acesso a API.
+
+Verifique qual a URL e porta a API esta sendo executada e caso seja diferente do arquivo "app-api.ts" realize a alteração.
+
+### Qualquer dúvida entre em contato pelo e-mail willian_menezes_santos@hotmail.com
