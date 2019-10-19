@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
             Slogin: ['',
                 [
                     Validators.required
+                   
                 ]
             ],
             Ssenha: ['',

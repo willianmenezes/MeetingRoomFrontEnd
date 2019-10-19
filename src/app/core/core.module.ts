@@ -28,8 +28,7 @@ import { CadastroReservaListaComponent } from './reservas/cadastro-reserva-lista
     imports: [
         CommonModule,
         ReactiveFormsModule,
-        RouterModule
-    ],
+        RouterModule    ],
     exports: []
 })
 export class CoreModule {

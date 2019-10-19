@@ -8,6 +8,7 @@ import { CoreModule } from './core/core.module';
 import { AppRoutingModule } from './app.routing.module';
 import { ErrorsModule } from './errors/errors.module';
 import { RequestInterceptor } from './core/interceptor/request.interceptor';
+import { LoadingModule } from './shared/loading/loading.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { RequestInterceptor } from './core/interceptor/request.interceptor';
     AppRoutingModule,
     ErrorsModule,
     HomeModule,
-    CoreModule
+    CoreModule,
+    LoadingModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

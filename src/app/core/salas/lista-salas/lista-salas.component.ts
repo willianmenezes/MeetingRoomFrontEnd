@@ -41,7 +41,7 @@ export class ListaSalasComponent implements OnInit {
             .subscribe((salas: Sala[]) => {
                 this.salas = salas;
             }, (erro) => {
-                alertfy.error(erro.error.Message);
+                alertfy.error(erro.error.message);
                 console.log(erro);
             });
     }
