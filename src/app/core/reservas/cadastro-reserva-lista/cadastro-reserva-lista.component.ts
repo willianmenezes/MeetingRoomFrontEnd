@@ -107,6 +107,7 @@ export class CadastroReservaListaComponent implements OnInit {
 
     setarNomeSala(reserva: Reserva) {
         // Buscando a sala para usar o nome
+
         this.salasService
             .getById(reserva.nidSala)
             .subscribe((sala: Sala) => {

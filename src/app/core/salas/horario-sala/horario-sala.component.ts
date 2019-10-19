@@ -83,7 +83,6 @@ export class HorarioSalaComponent implements OnInit {
         this.horarioService
             .getReservaByidSala(this.activatedRoute.snapshot.params.id)
             .subscribe((reservas: Reserva[]) => {
-                console.log(reservas);
 
                 this.reservas = reservas;
             }, (erro) => {

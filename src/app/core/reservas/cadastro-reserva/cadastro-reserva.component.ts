@@ -24,9 +24,9 @@ export class CadastroReservaComponent implements OnInit {
     // classe responsável por reservar um ou mais horarios das salas
 
     reserva: Reserva;
-    @ViewChild('inputDtaIni', { static: false }) inputDtaIni: ElementRef;
-    @ViewChild('inputDtaFim', { static: false }) inputDtaFim: ElementRef;
-    @ViewChild('inputSala', { static: false }) inputSala: ElementRef;
+    @ViewChild('inputDtaIni', { static: true }) inputDtaIni: ElementRef;
+    @ViewChild('inputDtaFim', { static: true }) inputDtaFim: ElementRef;
+    @ViewChild('inputSala', { static: true }) inputSala: ElementRef;
     formReserva: FormGroup;
 
     constructor(
@@ -83,6 +83,9 @@ export class CadastroReservaComponent implements OnInit {
             .subscribe((reserva: Reserva) => {
 
                 if (reserva != null) {
+
+                    console.log(reserva);
+                    
 
                     this.reserva = reserva;
 
